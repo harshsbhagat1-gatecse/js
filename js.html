@@ -1,0 +1,2410 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Hidden Copy Buttons (Exact Copy)</title>
+    <style>
+        body {
+            font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+            background: #f7f9fc;
+            margin: 0;
+            padding: 28px;
+            color: #111
+        }
+
+        .wrap {
+            max-width: 1000px;
+            margin: 0 auto
+        }
+
+        h1 {
+            font-size: 20px;
+            margin: 0 0 12px
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 10px
+        }
+
+        button {
+            padding: 10px 12px;
+            border: 0;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            background: linear-gradient(180deg, #cfd7df, #9da5ae);
+            color: #fff
+        }
+
+        .msg {
+            min-height: 22px;
+            margin-top: 10px;
+            color: rgb(187, 204, 199);
+            font-weight: 600
+        }
+
+        /* Hidden containers so content is not visible on the website */
+        .hidden-bin {
+            display: none !important;
+            visibility: hidden !important;
+            height: 0;
+            width: 0;
+            overflow: hidden
+        }
+
+        /* toast */
+        .toast {
+            position: fixed;
+            right: 18px;
+            bottom: 18px;
+            background: #222;
+            color: #fff;
+            padding: 10px 14px;
+            border-radius: 8px;
+            box-shadow: 0 10px 24px rgba(0, 0, 0, .2);
+            opacity: 0;
+            transform: translateY(8px);
+            transition: opacity .18s ease, transform .18s ease;
+            z-index: 9999
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateY(0)
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+
+        <div class="grid" id="btnGrid"></div>
+        <div class="msg" id="status" aria-live="polite"></div>
+    </div>
+
+    <!-- Hidden content lives here -->
+    <div class="hidden-bin" id="hiddenBin">
+
+        <!-- ✅ Paste your FULL content for Button 1 between these markers -->
+        <textarea id="copy1" data-title="area calc">
+//index
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <title>Shape Area Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+
+            <h1>Shape Area Calculator</h1>
+            <p>Enter dimensions and click Calculate. Invalid inputs will show an error
+                message.</p>
+        </header>
+        <!-- Triangle card -->
+        <section class="card" id="triangleCard">
+            <h3>Triangle Area (Heron's Formula)</h3>
+            <div class="row">
+                <div>
+                    <label for="a">Side A:</label><br>
+                    <input id="a" type="number" step="any" min="0" value="5">
+                </div>
+                <div>
+                    <label for="b">Side B:</label><br>
+                    <input id="b" type="number" step="any" min="0" value="10">
+                </div>
+                <div>
+                    <label for="c">Side C:</label><br>
+                    <input id="c" type="number" step="any" min="0" value="11">
+                </div>
+                <div>
+                    <button id="calcTriangle">Calculate Triangle Area</button>
+                </div>
+                <div class="result" id="triangleResult" aria-live="polite"></div>
+                <div class="error" id="triangleError" aria-live="assertive"></div>
+            </div>
+        </section>
+        <!-- Rectangle card -->
+        <section class="card" id="rectangleCard">
+            <h3>Rectangle Area</h3>
+            <div class="row">
+                <div>
+                    <label for="length">Length:</label><br>
+                    <input id="length" type="number" step="any" min="0" value="70">
+                </div>
+                <div>
+                    <label for="width">Width:</label><br>
+                    <input id="width" type="number" step="any" min="0" value="11">
+                </div>
+                <div>
+                    <button id="calcRectangle">Calculate Rectangle Area</button>
+                </div>
+                <div class="result" id="rectangleResult"></div>
+                <div class="error" id="rectangleError"></div>
+            </div>
+        </section>
+        <!-- Circle card -->
+        <section class="card" id="circleCard">
+            <h3>Circle Area</h3>
+            <div class="row">
+                <div>
+                    <label for="radius">Radius:</label><br>
+                    <input id="radius" type="number" step="any" min="0" value="8">
+                </div>
+                <div>
+                    <button id="calcCircle">Calculate Circle Area</button>
+                </div>
+                <div class="result" id="circleResult"></div>
+                <div class="error" id="circleError"></div>
+            </div>
+        </section>
+    </div>
+    <script src="app.js"></script>
+</body>
+
+</html>
+
+//app.js
+
+// helper functions
+function showResult(id, text) {
+document.getElementById(id).textContent = text;
+}
+function showError(id, text) {
+document.getElementById(id).textContent = text;
+}
+function clearMessages(...ids) {
+ids.forEach(i => showError(i, ''));
+}
+// TRIANGLE
+document.getElementById('calcTriangle').addEventListener('click', function(){
+const a = parseFloat(document.getElementById('a').value);
+const b = parseFloat(document.getElementById('b').value);
+const c = parseFloat(document.getElementById('c').value);
+clearMessages('triangleError');
+showResult('triangleResult', '');
+if (!isFinite(a) || !isFinite(b) || !isFinite(c)) {
+showError('triangleError', 'Please enter valid numbers for all sides.');
+return;
+}
+if (a <= 0 || b <=0 || c <=0) { showError('triangleError', 'All sides must be positive numbers.' ); return; } if (a + b
+    <=c || a + c <=b || b + c <=a) { showError('triangleError', 'Invalid triangle (triangle inequality violated).' );
+    return; } const s=(a + b + c) / 2; const area=Math.sqrt(s * (s - a) * (s - b) * (s - c));
+    showResult('triangleResult', 'Area: ' + area.toFixed(2) + ' sq. units' ); }); // RECTANGLE
+    document.getElementById('calcRectangle').addEventListener('click', function(){ const
+    l=parseFloat(document.getElementById('length').value); const w=parseFloat(document.getElementById('width').value);
+    clearMessages('rectangleError'); showResult('rectangleResult', '' ); if (!isFinite(l) || !isFinite(w)) {
+    showError('rectangleError', 'Please enter valid numbers for length and width.' ); return; } if (l <=0 || w <=0) {
+    showError('rectangleError', 'Length and width must be positive numbers.' ); return; } const area=l * w;
+    showResult('rectangleResult', 'Area: ' + area.toFixed(2) + ' sq. units' ); }); // CIRCLE
+    document.getElementById('calcCircle').addEventListener('click', function(){ const
+    r=parseFloat(document.getElementById('radius').value); clearMessages('circleError'); showResult('circleResult', ''
+    ); if (!isFinite(r)) { showError('circleError', 'Please enter a valid numeric radius.' ); return; } if (r <=0) {
+    showError('circleError', 'Radius must be a positive number.' ); return; } const area=Math.PI * r * r;
+    showResult('circleResult', 'Area: ' + area.toFixed(2) + ' sq. units' ); }); // Allow Enter key to trigger
+    ['a','b','c'].forEach(id=> {
+    document.getElementById(id).addEventListener('keydown', e => {
+    if (e.key === 'Enter') document.getElementById('calcTriangle').click();
+    });
+    });
+    ['length','width'].forEach(id => {
+    document.getElementById(id).addEventListener('keydown', e => {
+    if (e.key === 'Enter') document.getElementById('calcRectangle').click();
+    });
+    });
+    document.getElementById('radius').addEventListener('keydown', e => {
+    if (e.key === 'Enter') document.getElementById('calcCircle').click();
+    });
+
+    //style.css
+
+    :root {
+    --card-bg:#ffffff;
+    --page-bg:#f3f3f3;
+    --accent:#1976d2;
+    --muted:#7a7a7a;
+    --danger:#d32f2f;
+    --radius:10px;
+    font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica
+    Neue', Arial;
+    }
+    html,body {
+    height:100%;
+    margin:0;
+    }
+    body {
+    background:linear-gradient(180deg,var(--page-bg),#efefef);
+    display:flex;
+    align-items:flex-start;
+    justify-content:center;
+    padding:48px 16px;
+    }
+    .wrapper {
+    width:440px;
+    max-width:95%;
+    }
+    header {
+    text-align:center;
+    margin-bottom:18px;
+    }
+    header h1 {
+    margin:6px 0;
+    font-size:20px;
+    }
+    header p {
+    color:var(--muted);
+    font-size:13px;
+    margin:0;
+    }
+    .card {
+    background:var(--card-bg);
+    border-radius:var(--radius);
+    box-shadow:0 1px 0 rgba(0,0,0,0.06);
+    padding:22px;
+    border:1px solid rgba(0,0,0,0.06);
+    margin-bottom:18px;
+    }
+    .card h3 {
+    margin:0 0 8px 0;
+    text-align:center;
+    }
+    .row {
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    align-items:center;
+    }
+    label {
+    font-size:12px;
+    color:var(--muted);
+    }
+    input[type=number] {
+    width:120px;
+    padding:8px;
+    border-radius:6px;
+    border:1px solid #ddd;
+    text-align:center;
+    }
+    button {
+    background:var(--accent);
+    color:white;
+    border:none;
+    padding:8px 12px;
+    border-radius:6px;
+    cursor:pointer;
+    }
+    button:active {
+    transform:translateY(1px);
+    }
+    .result {
+    margin-top:10px;
+    font-weight:600;
+    text-align:center;
+    }
+    .note {
+    font-size:13px;
+    color:var(--muted);
+    text-align:center;
+    margin-top:6px;
+    }
+    .error {
+    color:var(--danger);
+    font-weight:600;
+    text-align:center;
+    margin-top:8px;
+    }
+    @media (max-width:420px) {
+    .wrapper {
+    width:100%;
+    }
+    input[type=number] {
+    width:100%;
+    }
+    .row {
+    align-items:stretch;
+    }
+    }
+
+    
+
+    </textarea>
+
+        <!-- ✅ Button 2 -->
+        <textarea id="copy2" data-title="table">
+//index
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Multiplication Table Generator</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <main class="container">
+        <div class="card">
+           
+            <h1>Multiplication Table Generator</h1>
+            <div class="form-row">
+                <label>Multiplicand:</label>
+                <input id="multiplicand" type="number" min="0" placeholder="e.g. 5" />
+                <label style="margin-left:16px;">Multiplier:</label>
+                <input id="multiplier" type="number" min="0" placeholder="e.g. 10" />
+            </div>
+            <div class="form-row">
+                <button id="generate">Generate Table</button>
+                <button id="clear" class="secondary">Clear</button>
+            </div>
+            <div id="warning" class="warning" aria-live="polite"></div>
+            <section>
+                <h2>Table</h2>
+                <ul id="result" class="result-list"></ul>
+            </section>
+        </div>
+    </main>
+    <!-- By default this loads the `for` version. Change to index_while.js or
+index_dowhile.js to test others. -->
+    <script src="index.js"></script>
+</body>
+
+</html>
+
+//script.js
+
+// index_while.js
+// Generates multiplication table using a while loop
+(function () {
+const multiplicandEl = document.getElementById("multiplicand");
+const multiplierEl = document.getElementById("multiplier");
+const generateBtn = document.getElementById("generate");
+const clearBtn = document.getElementById("clear");
+const resultList = document.getElementById("result");
+const warning = document.getElementById("warning");
+function showWarning(msg) {
+warning.textContent = msg;
+warning.style.display = "block";
+}
+function hideWarning() {
+warning.textContent = "";
+warning.style.display = "none";
+}
+function clearResults() {
+resultList.innerHTML = "";
+}
+function generateTableWhile() {
+hideWarning();
+clearResults();
+const a = parseInt(multiplicandEl.value, 10);
+const n = parseInt(multiplierEl.value, 10);
+if (isNaN(a) || isNaN(n)) {
+showWarning("Please enter valid numbers (non-zero positive integers).");
+return;
+}
+if (a <= 0 || n <=0) { showWarning("Please enter non zero number (positive integers only)."); return; } let i=1; while
+    (i <=n) { const li=document.createElement("li"); li.textContent=`${a} x ${i}=${a * i}`; resultList.appendChild(li);
+    i++; } } generateBtn.addEventListener("click", generateTableWhile); clearBtn.addEventListener("click", function () {
+    multiplicandEl.value="" ; multiplierEl.value="" ; hideWarning(); clearResults(); }); })(); //style.css :root{
+    --bg:#f4f5f6; --card:#ffffff; --accent:#2e7d32; /* green */ --accent-dark:#1b5e20; --muted:#666; }
+    *{box-sizing:border-box;font-family:Inter, "Segoe UI" , Roboto, Arial, sans-serif} body{ margin:0;
+    background:linear-gradient(180deg,var(--bg),#efeef0); min-height:100vh; display:flex; align-items:flex-start;
+    justify-content:center; padding:40px 16px; } .container{width:720px; max-width:95%} .card{ background:var(--card);
+    padding:28px 30px; border-radius:10px; box-shadow:0 6px 18px rgba(20,20,30,0.08); border:1px solid rgba(0,0,0,0.03);
+    } h1{ margin:0 0 18px 0; font-size:28px; text-align:center; color:#222; } .form-row{ display:flex; gap:10px;
+    align-items:center; margin-bottom:12px; flex-wrap:wrap; } label{font-size:14px; color:var(--muted)}
+    input[type="number" ]{ padding:8px 10px; border-radius:4px; border:1px solid #ddd; min-width:130px; } button{
+    background:linear-gradient(180deg,var(--accent),var(--accent-dark)); color:#fff; border:none; padding:8px 14px;
+    border-radius:6px; cursor:pointer; font-weight:600; box-shadow:0 2px 6px rgba(46,125,50,0.18); } button.secondary{
+    background:#fff; color:var(--accent-dark); border:1px solid #ddd; box-shadow:none; font-weight:600; } .warning{
+    color:#a82727; background: #fff0f0; border:1px solid #f2c2c2; padding:8px 10px; border-radius:6px; margin-top:6px;
+    display:none; } section h2{margin-top:18px;margin-bottom:6px;color:#222} .result-list{ margin:6px 0 0 16px;
+    padding-left:8px; color:#222; } .result-list li{ margin:6px 0; line-height:1.2; font-family:monospace; }
+    .note{font-size:12px;color:var(--muted);margin-top:14px}"
+    </textarea>
+
+        <!-- ✅ Button 3 -->
+        <textarea id="copy3" data-title="string">
+//index
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>String Utilities — Reverse / Palindrome / Replace</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <main class="wrap">
+        <div class="card">
+            <h1>Sakule Abhijeet Ravindra</h1>
+            <h1>42467 S-8</h1>
+            <h1>String Utilities</h1>
+            <!-- Reverse -->
+            <div class="block">
+                <h2>🔄 Reverse String</h2>
+                <label for="reverse-input">Input string</label>
+                <input id="reverse-input" type="text" placeholder="Type string to reverse" />
+                <div class="actions">
+                    <button id="btn-reverse">Reverse String</button>
+                    <button class="secondary" id="clear-reverse">Clear</button>
+                </div>
+                <div class="output" id="reverse-output" aria-live="polite"></div>
+            </div>
+            <hr />
+            <!-- Palindrome check -->
+            <div class="block">
+                <h2>🔁 Palindrome Check</h2>
+                <label for="palindrome-input">Input string</label>
+                <input id="palindrome-input" type="text" placeholder="Type string to
+check palindrome" />
+                <div class="actions">
+                    <button id="btn-palindrome">Check Palindrome</button>
+                    <button class="secondary" id="clear-palindrome">Clear</button>
+                </div>
+                <div class="output" id="palindrome-output" aria-live="polite"></div>
+                <div class="muted">Note: Palindrome check is case-insensitive and
+                    ignores spaces.</div>
+            </div>
+            <hr />
+            <!-- Replace first occurrence -->
+            <div class="block">
+                <h2>✏️ Replace First Occurrence</h2>
+                <label for="replace-first-string">String</label>
+                <input id="replace-first-string" type="text" placeholder="Original string" />
+                <div class="two-col">
+                    <div>
+                        <label for="replace-first-old">Old (to replace)</label>
+                        <input id="replace-first-old" type="text" placeholder="characters to
+replace (can be group)" />
+                    </div>
+                    <div>
+                        <label for="replace-first-new">New</label>
+                        <input id="replace-first-new" type="text" placeholder="replacement
+text" />
+                    </div>
+                </div>
+                <div class="actions">
+                    <button id="btn-replace-first">Replace First</button>
+                    <button class="secondary" id="clear-replace-first">Clear</button>
+                </div>
+                <div class="output" id="replace-first-output" aria-live="polite"></div>
+            </div>
+            <hr />
+            <!-- Replace all occurrences -->
+            <div class="block">
+                <h2>📝 Replace All Occurrences</h2>
+                <label for="replace-all-string">String</label>
+                <input id="replace-all-string" type="text" placeholder="Original string" />
+                <div class="two-col">
+                    <div>
+                        <label for="replace-all-old">Old (to replace)</label>
+                        <input id="replace-all-old" type="text" placeholder="characters to
+replace (can be group)" />
+                    </div>
+                    <div>
+                        <label for="replace-all-new">New</label>
+                        <input id="replace-all-new" type="text" placeholder="replacement text" />
+                    </div>
+                </div>
+                <div class="actions">
+                    <button id="btn-replace-all">Replace All</button>
+                    <button class="secondary" id="clear-replace-all">Clear</button>
+                </div>
+                <div class="output" id="replace-all-output" aria-live="polite"></div>
+            </div>
+            <p class="footnote">Works with multi-character groups. Empty "old" field
+                will be rejected to avoid accidental infinite replacements.</p>
+        </div>
+    </main>
+    <script src="index.js"></script>
+</body>
+
+</html>
+
+//script.js
+
+(function () {
+// ---------- reverse ----------
+const reverseInput = document.getElementById("reverse-input");
+const btnReverse = document.getElementById("btn-reverse");
+const reverseOutput = document.getElementById("reverse-output");
+const clearReverse = document.getElementById("clear-reverse");
+// ---------- palindrome ----------
+const palindromeInput = document.getElementById("palindrome-input");
+const btnPalindrome = document.getElementById("btn-palindrome");
+const palindromeOutput = document.getElementById("palindrome-output");
+const clearPalindrome = document.getElementById("clear-palindrome");
+// ---------- replace first ----------
+const replaceFirstString = document.getElementById("replace-first-string");
+const replaceFirstOld = document.getElementById("replace-first-old");
+const replaceFirstNew = document.getElementById("replace-first-new");
+const btnReplaceFirst = document.getElementById("btn-replace-first");
+const replaceFirstOutput = document.getElementById("replace-first-output");
+const clearReplaceFirst = document.getElementById("clear-replace-first");
+// ---------- replace all ----------
+const replaceAllString = document.getElementById("replace-all-string");
+const replaceAllOld = document.getElementById("replace-all-old");
+const replaceAllNew = document.getElementById("replace-all-new");
+const btnReplaceAll = document.getElementById("btn-replace-all");
+const replaceAllOutput = document.getElementById("replace-all-output");
+const clearReplaceAll = document.getElementById("clear-replace-all");
+// Helper: show message in an output element (with simple styling)
+function showOutput(el, msg, isError) {
+// prefer CSS variable, fallback if not available
+if (isError) {
+el.style.color =
+getComputedStyle(document.documentElement).getPropertyValue("--danger")
+|| "#b83232";
+} else {
+el.style.color = "#111";
+}
+el.textContent = msg;
+}
+// Helper: reverse string without using built-in reverse
+function reverseString(str) {
+let out = "";
+for (let i = str.length - 1; i >= 0; i--) {
+out += str[i];
+}
+return out;
+}
+// ---------- Reverse button ----------
+btnReverse.addEventListener("click", function () {
+const s = reverseInput.value;
+if (s === "") {
+showOutput(reverseOutput, "Please enter a string to reverse.", true);
+return;
+}
+const rev = reverseString(s);
+showOutput(reverseOutput, rev, false);
+});
+clearReverse.addEventListener("click", function () {
+reverseInput.value = "";
+showOutput(reverseOutput, "");
+});
+// ---------- Palindrome ----------
+// Normalize: remove spaces and lowercase
+function normalizeForPalindrome(s) {
+let out = "";
+for (let i = 0; i < s.length; i++) { const ch=s[i]; if (ch !==" " ) { out +=ch.toLowerCase(); } } return out; }
+    btnPalindrome.addEventListener("click", function () { const s=palindromeInput.value; if (s==="" ) {
+    showOutput(palindromeOutput, "Please enter a string to check." , true); return; } const
+    norm=normalizeForPalindrome(s); const rev=reverseString(norm); if (norm===rev) {
+    showOutput(palindromeOutput, "It is a palindrome." , false); } else {
+    showOutput(palindromeOutput, "It is not a palindrome." , false); } }); clearPalindrome.addEventListener("click",
+    function () { palindromeInput.value="" ; showOutput(palindromeOutput, "" ); }); // ---------- Replace first
+    occurrence of old substring with new ---------- function replaceFirst(original, oldSub, newSub) { if
+    (oldSub.length===0) { return { error: "Old substring must not be empty." }; } const idx=original.indexOf(oldSub); if
+    (idx===-1) { return { result: original, info: "No occurrence found; original stringunchanged." }; } const
+    before=original.substring(0, idx); const after=original.substring(idx + oldSub.length); return { result: before +
+    newSub + after }; } btnReplaceFirst.addEventListener("click", function () { const orig=replaceFirstString.value;
+    const oldSub=replaceFirstOld.value; const newSub=replaceFirstNew.value; if (orig==="" ) {
+    showOutput(replaceFirstOutput, "Please enter the original string." , true); return; } if (oldSub==="" ) {
+    showOutput(replaceFirstOutput, "Please enter the old substring to replace(cannot be empty)." , true); return; }
+    const res=replaceFirst(orig, oldSub, newSub); if (res.error) { showOutput(replaceFirstOutput, res.error, true); }
+    else if (res.info) { showOutput(replaceFirstOutput, res.info + "\n\nResult:\n" + res.result, false); } else {
+    showOutput(replaceFirstOutput, res.result, false); } }); clearReplaceFirst.addEventListener("click", function () {
+    replaceFirstString.value="" ; replaceFirstOld.value="" ; replaceFirstNew.value="" ;
+    showOutput(replaceFirstOutput, "" ); }); // ---------- Replace all occurrences (non-overlapping) ---------- // This
+    function finds occurrences using indexOf and skips the matchedsubstring length // so replacements are
+    non-overlapping (same as native replaceAll behavior). function replaceAll(original, oldSub, newSub) { if
+    (oldSub.length===0) { return { error: "Old substring must not be empty." }; } let result="" ; let pos=0; let
+    found=false; let idx=original.indexOf(oldSub, pos); while (idx !==-1) { found=true; // append part before match and
+    then the replacement result +=original.slice(pos, idx) + newSub; // advance position by full oldSub length to avoid
+    overlaps pos=idx + oldSub.length; idx=original.indexOf(oldSub, pos); } // append remainder result
+    +=original.slice(pos); if (!found) { return { result: original,
+    info: "No occurrence found; original string unchanged." }; } return { result: result }; }
+    btnReplaceAll.addEventListener("click", function () { const orig=replaceAllString.value; const
+    oldSub=replaceAllOld.value; const newSub=replaceAllNew.value; if (orig==="" ) {
+    showOutput(replaceAllOutput, "Please enter the original string." , true); return; } if (oldSub==="" ) {
+    showOutput(replaceAllOutput, "Please enter the old substring to replace(cannot be empty)." , true); return; } const
+    res=replaceAll(orig, oldSub, newSub); if (res.error) { showOutput(replaceAllOutput, res.error, true); } else if
+    (res.info) { showOutput(replaceAllOutput, res.info + "\n\nResult:\n" + res.result, false); } else {
+    showOutput(replaceAllOutput, res.result, false); } }); clearReplaceAll.addEventListener("click", function () {
+    replaceAllString.value="" ; replaceAllOld.value="" ; replaceAllNew.value="" ; showOutput(replaceAllOutput, "" ); });
+    // Optional: Pressing Enter triggers primary action for that block reverseInput.addEventListener("keydown", function
+    (e) { if (e.key==="Enter" ) btnReverse.click(); }); palindromeInput.addEventListener("keydown", function (e) { if
+    (e.key==="Enter" ) btnPalindrome.click(); }); replaceFirstNew.addEventListener("keydown", function (e) { if
+    (e.key==="Enter" ) btnReplaceFirst.click(); }); replaceAllNew.addEventListener("keydown", function (e) { if
+    (e.key==="Enter" ) btnReplaceAll.click(); }); })(); //style.css :root{ --bg: #f5f6f8; --card: #fff; --accent:
+    #2b6cb0; --accent-2: #2c7a7b; --muted: #666; --danger: #b83232; }
+    *{box-sizing:border-box;font-family:Inter,system-ui,-apple-system,"SegoeUI",Roboto,Arial;} body{ margin:0;
+    min-height:100vh; background:linear-gradient(180deg,var(--bg),#eceff1); display:flex; align-items:flex-start;
+    justify-content:center; padding:36px 16px; } .wrap{width:800px; max-width:96%} .card{ background:var(--card);
+    border-radius:10px; padding:22px; box-shadow:0 8px 26px rgba(30,30,30,0.06); border:1px solid rgba(0,0,0,0.04); }
+    h1{margin:0 0 12px 0;text-align:center;color:#222} .block{margin-bottom:16px}
+    label{display:block;font-size:13px;color:var(--muted);margin-bottom:6px} input[type="text" ]{ width:100%;
+    padding:9px 10px; border-radius:6px; border:1px solid #ddd; font-size:15px; margin-bottom:10px; }
+    .two-col{display:flex; gap:12px;} .two-col> div{flex:1}
+    .actions{display:flex; gap:8px; align-items:center; margin-bottom:8px}
+    button{
+    background:linear-gradient(180deg,var(--accent),var(--accent-2));
+    color:white;
+    border:none;
+    padding:8px 12px;
+    border-radius:7px;
+    cursor:pointer;
+    font-weight:600;
+    box-shadow:0 3px 8px rgba(43,108,176,0.12);
+    }
+    button.secondary{
+    background:#fff;
+    color:#333;
+    border:1px solid #e0e0e0;
+    box-shadow:none;
+    }
+    .output{
+    min-height:34px;
+    padding:8px 10px;
+    border-radius:6px;
+    border:1px dashed #eee;
+    background:#fafafa;
+    color:#111;
+    font-family:ui-monospace, SFMono-Regular, Menlo, monospace;
+    white-space:pre-wrap;
+    }
+    .muted{font-size:12px;color:var(--muted); margin-top:6px}
+    .footnote{font-size:12px;color:var(--muted); margin-top:12px}
+    hr{border:0;border-top:1px solid rgba(0,0,0,0.06); margin:12px 0}
+    </textarea>
+
+        <!-- ✅ Button 4 -->
+        <textarea id="copy4" data-title="string_comp">
+//index
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>String Comparison Experiment</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <main class="wrap">
+        <div class="card">
+
+            <div class="form-row">
+                <label for="str1">String 1:</label>
+                <input id="str1" type="text" placeholder="Enter first string" />
+            </div>
+            <div class="form-row">
+                <label for="str2">String 2:</label>
+                <input id="str2" type="text" placeholder="Enter second string" />
+            </div>
+            <div class="actions">
+                <button id="btn-compare">Compare</button>
+                <button id="btn-clear" class="secondary">Clear</button>
+            </div>
+            <div id="warning" class="warning" aria-live="polite"></div>
+            <div id="results" class="results" aria-live="polite" hidden>
+                <p><strong>String 1:</strong> <span id="out-str1"></span></p>
+                <p><strong>String 2:</strong> <span id="out-str2"></span></p>
+                <p><strong>Length Comparison:</strong> <span id="out-length"></span></p>
+                <p><strong>Loose Equality (==):</strong> <span id="out-loose"></span></p>
+                <p><strong>Strict Equality (===):</strong> <span id="out-strict"></span></p>
+                <p><strong>Equality (localeCompare):</strong> <span id="out-locale"></span></p>
+                <p><strong>Developer Mode (case-insensitive):</strong> <span id="out-dev"></span></p>
+            </div>
+            <p class="note">Developer mode ignores case (PICT = pict = Pict =
+                PiCT).</p>
+        </div>
+    </main>
+    <script src="index.js"></script>
+</body>
+
+</html>
+
+//script.js
+
+// index.js
+// Compare two strings: length, loose equality, strict equality, simplified localeCompare, developer mode
+(function () {
+const str1El = document.getElementById("str1");
+const str2El = document.getElementById("str2");
+const btnCompare = document.getElementById("btn-compare");
+const btnClear = document.getElementById("btn-clear");
+const warningEl = document.getElementById("warning");
+const resultsEl = document.getElementById("results");
+const outStr1 = document.getElementById("out-str1");
+const outStr2 = document.getElementById("out-str2");
+const outLength = document.getElementById("out-length");
+const outLoose = document.getElementById("out-loose");
+const outStrict = document.getElementById("out-strict");
+const outLocale = document.getElementById("out-locale");
+const outDev = document.getElementById("out-dev");
+function showWarning(msg) {
+warningEl.textContent = msg;
+warningEl.style.display = "block";
+resultsEl.hidden = true;
+}
+function hideWarning() {
+warningEl.textContent = "";
+warningEl.style.display = "none";
+}
+function showResults() {
+resultsEl.hidden = false;
+}
+function compareStrings(s1, s2) {
+// show raw inputs
+outStr1.textContent = s1 === "" ? '"" (empty)' : `"${s1}"`;
+outStr2.textContent = s2 === "" ? '"" (empty)' : `"${s2}"`;
+// length comparison
+if (s1.length === s2.length) {
+outLength.textContent = `Both are equal length (${s1.length} characters).`;
+} else if (s1.length > s2.length) {
+outLength.textContent = `"${s1}" is longer than "${s2}" (${s1.length} vs
+${s2.length}).`;
+} else {
+outLength.textContent = `"${s2}" is longer than "${s1}" (${s2.length} vs
+${s1.length}).`;
+}
+// loose equality (==)
+try {
+outLoose.textContent = String(s1 == s2);
+} catch {
+outLoose.textContent = "Error evaluating ==.";
+}
+// strict equality (===)
+try {
+outStrict.textContent = String(s1 === s2);
+} catch {
+outStrict.textContent = "Error evaluating ===.";
+}
+// localeCompare simplified (equal or not)
+try {
+const cmp = s1.localeCompare(s2);
+outLocale.textContent = (cmp === 0) ? "Equal" : "Not equal";
+} catch {
+outLocale.textContent = "Error evaluating localeCompare.";
+}
+// Developer mode: case-insensitive
+try {
+if (s1.toLowerCase() === s2.toLowerCase()) {
+outDev.textContent = "Equal";
+} else {
+outDev.textContent = "Not equal ";
+}
+} catch {
+outDev.textContent = "Error evaluating developer compare.";
+}
+showResults();
+}
+btnCompare.addEventListener("click", function () {
+hideWarning();
+const s1 = str1El.value;
+const s2 = str2El.value;
+if (s1 === "" && s2 === "") {
+showWarning("Please enter at least one string to compare.");
+return;
+}
+compareStrings(s1, s2);
+});
+btnClear.addEventListener("click", function () {
+str1El.value = "";
+str2El.value = "";
+hideWarning();
+resultsEl.hidden = true;
+});
+str1El.addEventListener("keydown", e => { if (e.key === "Enter")
+btnCompare.click(); });
+str2El.addEventListener("keydown", e => { if (e.key === "Enter")
+btnCompare.click(); });
+})();
+
+
+//style.css
+
+:root{
+--bg:#f6f7fb;
+--card:#ffffff;
+--accent:#1e88e5;
+--muted:#666;
+--danger:#b83232;
+}
+*{box-sizing:border-box;font-family:Inter,system-ui,-apple-system,"SegoeUI",Roboto,Arial;}
+body{
+margin:0;
+min-height:100vh;
+display:flex;
+align-items:flex-start;
+justify-content:center;
+padding:36px 16px;
+background:linear-gradient(180deg,var(--bg),#f0f3f8);
+}
+.wrap{width:880px; max-width:96%}
+.card{
+background:var(--card);
+border-radius:10px;
+padding:22px;
+box-shadow:0 10px 30px rgba(20,20,30,0.06);
+border:1px solid rgba(0,0,0,0.04);
+}
+h1{margin:0 0 18px 0;color:#123d6b}
+.form-row{margin-bottom:12px}
+label{display:block;font-size:14px;color:var(--muted); margin-bottom:6px}
+input[type="text"]{
+width:100%;
+padding:9px 10px;
+border-radius:6px;
+border:1px solid #e2e6ee;
+font-size:15px;
+}
+.actions{display:flex; gap:10px; margin-top:6px; margin-bottom:12px}
+button{
+background:linear-gradient(180deg,var(--accent),#1769aa);
+color:white;
+border:none;
+padding:8px 14px;
+border-radius:8px;
+cursor:pointer;
+font-weight:600;
+box-shadow:0 4px 12px rgba(30,120,200,0.12);
+}
+button.secondary{
+background:#fff;
+color:#333;
+border:1px solid #e6e6e6;
+box-shadow:none;
+}
+.warning{
+display:none;
+color:var(--danger);
+background:#fff6f6;
+border:1px solid #f2c2c2;
+padding:8px 10px;
+border-radius:6px;
+margin-bottom:10px;
+}
+.results{
+margin-top:12px;
+background:#fafcff;
+border:1px solid #eef4ff;
+padding:14px;
+border-radius:8px;
+color:#111;
+}
+.results p{margin:8px 0}
+.note{font-size:12px;color:var(--muted);margin-top:12px}"
+
+    </textarea>
+
+        <!-- ✅ Button 5 -->
+        <textarea id="copy5" data-title="countdown">
+//index
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Countdown Timer</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <main class="container">
+        <div class="card">
+
+            <h1>Countdown Timer</h1>
+            <label for="target">Enter date and time:</label>
+            <div class="controls">
+                <input id="target" type="datetime-local" />
+                <button id="submitBtn">Submit</button>
+                <button id="startBtn" disabled>Start</button>
+                <button id="resetBtn" disabled>Reset</button>
+            </div>
+            <div id="message" class="message"></div>
+            <div id="display" class="display">
+                <span id="countdownText">-- : -- : --</span>
+            </div>
+        </div>
+        <footer class="note">Only non-zero units are shown (e.g. "2d 04:05:06" or
+            "03:21").</footer>
+    </main>
+    <script src="index.js"></script>
+</body>
+
+</html>
+
+//script.js
+
+document.addEventListener('DOMContentLoaded', () => {
+// Get DOM elements (now safe)
+const input = document.getElementById('target');
+const submitBtn = document.getElementById('submitBtn');
+const startBtn = document.getElementById('startBtn');
+const resetBtn = document.getElementById('resetBtn');
+const messageEl = document.getElementById('message');
+const countdownText = document.getElementById('countdownText');
+// sanity check
+if (!input || !submitBtn || !startBtn || !resetBtn || !messageEl || !countdownText)
+{
+console.error('One or more DOM elements are missing. Check IDs inHTML.');
+return;
+}
+let targetDate = null;
+let timerId = null;
+// Utility to show messages
+function setMessage(txt, isError = true) {
+messageEl.textContent = txt || '';
+messageEl.style.color = isError ? '#b03' : '#0a6';
+}
+// Parse datetime-local robustly (handles missing seconds in some browsers)
+function parseDatetimeLocal(value) {
+if (!value) return null;
+// If value is of form "YYYY-MM-DDTHH:MM" append ":00"
+const needsSeconds = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/.test(value);
+const v = needsSeconds ? value + ':00' : value;
+const d = new Date(v);
+if (Number.isNaN(d.getTime())) {
+// try replacing 'T' by space (fallback)
+const alt = new Date(v.replace('T', ' '));
+if (!Number.isNaN(alt.getTime())) return alt;
+return null;
+}
+return d;
+}
+// Compute accurate components between now and future
+function computeDateDiffComponents(now, future) {
+if (future <= now) return null; // Start from years/months by comparing year/month fields let years=future.getFullYear()
+    - now.getFullYear(); let months=future.getMonth() - now.getMonth(); let days=future.getDate() - now.getDate(); let
+    hours=future.getHours() - now.getHours(); let minutes=future.getMinutes() - now.getMinutes(); let
+    seconds=future.getSeconds() - now.getSeconds(); // Normalize negative fields by borrowing from higher units if
+    (seconds < 0) { seconds +=60; minutes -=1; } if (minutes < 0) { minutes +=60; hours -=1; } if (hours < 0) { hours
+    +=24; days -=1; } if (days < 0) { // borrow days from previous month of 'future' const prevMonth=new
+    Date(future.getFullYear(), future.getMonth(), 0); //last day of prev month days +=prevMonth.getDate(); months -=1; }
+    if (months < 0) { months +=12; years -=1; } return { years, months, days, hours, minutes, seconds }; } // Format
+    display: show only relevant units, pad HH:MM:SS parts function formatComponents(c) { if (!c) return '' ; const
+    pad=(n)=> String(n).padStart(2, '0');
+    const parts = [];
+    if (c.years && c.years > 0) parts.push(`${c.years}y`);
+    if (c.months && c.months > 0) parts.push(`${c.months}m`);
+    if (c.days && c.days > 0) parts.push(`${c.days}d`);
+    // If no large units, show mm:ss (when hours=0) else HH:MM:SS
+    if (!c.years && !c.months && !c.days && c.hours === 0) {
+    parts.push(`${pad(c.minutes)}:${pad(c.seconds)}`);
+    } else {
+    parts.push(`${pad(c.hours)}:${pad(c.minutes)}:${pad(c.seconds)}`);
+    }
+    return parts.join(' ');
+    }
+    // Tick function: update once per second
+    function tick() {
+    try {
+    const now = new Date();
+    if (!targetDate) return;
+    if (targetDate <= now) { if (timerId) { clearInterval(timerId); timerId=null; }
+        countdownText.textContent='Countdown expired' ; setMessage('Countdown expired', false); startBtn.disabled=true;
+        resetBtn.disabled=false; return; } const comp=computeDateDiffComponents(now, targetDate); if (!comp) {
+        countdownText.textContent='Enter a future date, please' ; setMessage('Enter a future date, please.'); if
+        (timerId) { clearInterval(timerId); timerId=null; } startBtn.disabled=true; resetBtn.disabled=false; return; }
+        countdownText.textContent=formatComponents(comp); setMessage('', false); } catch (err) { console.error('Error in
+        tick():', err); setMessage('Unexpected error. See console.'); } } // Initialize button states
+        startBtn.disabled=true; resetBtn.disabled=true; // Submit: validate and preview
+        submitBtn.addEventListener('click', ()=> {
+        console.log('Submit clicked');
+        setMessage('');
+        const val = input.value;
+        if (!val) {
+        setMessage('Please pick a date and time.');
+        return;
+        }
+        const chosen = parseDatetimeLocal(val);
+        if (!chosen) {
+        setMessage('Invalid date/time format.');
+        console.error('parseDatetimeLocal failed for value:', val);
+        return;
+        }
+        const now = new Date();
+        if (chosen <= now) { targetDate=null; countdownText.textContent='Enter a future date, please' ;
+            setMessage('Enter a future date, please.'); startBtn.disabled=true; resetBtn.disabled=false; return; }
+            targetDate=chosen; setMessage('Target accepted. Click Start to begin.', false); startBtn.disabled=false;
+            resetBtn.disabled=false; tick(); // show preview immediately console.log('Target date set to',
+            targetDate.toString()); }); // Start: begin interval startBtn.addEventListener('click', ()=> {
+            console.log('Start clicked');
+            if (!targetDate) {
+            setMessage('No valid future date selected.');
+            return;
+            }
+            if (timerId) clearInterval(timerId);
+            tick(); // immediate update
+            timerId = setInterval(tick, 1000);
+            setMessage('Running...', false);
+            startBtn.disabled = true;
+            });
+            // Reset: stop timer and clear
+            resetBtn.addEventListener('click', () => {
+            console.log('Reset clicked');
+            if (timerId) { clearInterval(timerId); timerId = null; }
+            targetDate = null;
+            input.value = '';
+            countdownText.textContent = '-- : -- : --';
+            setMessage('');
+            startBtn.disabled = true;
+            resetBtn.disabled = true;
+            });
+            // allow Enter key to submit from input
+            input.addEventListener('keyup', (e) => {
+            if (e.key === 'Enter') submitBtn.click();
+            });
+            console.log('Countdown script initialized');
+            });
+
+            //style.css
+
+            :root{
+            --bg:#f5f6f8;
+            --card:#fff;
+            --accent:#2b6ef6;
+            --muted:#666;
+            --shadow: 0 6px 18px rgba(20,20,40,0.08);
+            }
+            *{box-sizing:border-box;font-family:Inter,Arial,Helvetica,sans-serif}
+            html,body{height:100%}
+            body{
+            margin:0;
+            background:linear-gradient(180deg,#f6f7fb 0%, #fbfbfd 100%);
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            padding:32px;
+            color:#222;
+            }
+            .container{width:100%;max-width:760px}
+            .card{
+            background:var(--card);
+            border-radius:12px;
+            padding:28px;
+            box-shadow:var(--shadow);
+            text-align:center;
+            border:1px solid rgba(40,40,40,0.03);
+            }
+            h1{margin:0 0 12px;color:var(--accent)}
+            label{display:block;font-size:0.9rem;color:var(--muted);margin-bottom:8px}
+            .controls{
+            display:flex;
+            gap:8px;
+            justify-content:center;
+            align-items:center;
+            margin-bottom:14px;
+            flex-wrap:wrap;
+            }
+            input[type="datetime-local"]{
+            padding:8px 10px;
+            border-radius:6px;
+            border:1px solid rgba(0,0,0,0.08);
+            background:#fff;
+            min-width:220px;
+            }
+            button{
+            padding:7px 12px;
+            border-radius:6px;
+            border:0;
+            cursor:pointer;
+            font-weight:600;
+            }
+            #submitBtn{background:var(--accent); color:white}
+            #startBtn{background:#09a64b;color:white}
+            #resetBtn{background:#e0e0e0;color:#121212}
+            .message{
+            height:22px;
+            margin-bottom:8px;
+            color:#b03;
+            font-weight:600;
+            }
+            .display{
+            margin-top:12px;
+            padding:18px;
+            border-radius:10px;
+            background:linear-gradient(180deg, rgba(43,110,246,0.05),
+            rgba(43,110,246,0.02));
+            display:inline-block;
+            min-width:280px;
+            }
+            #countdownText{
+            font-size:1.4rem;
+            font-weight:700;
+            color:#111;
+            }
+            .note{
+            margin-top:14px;
+            color:var(--muted);
+            font-size:0.85rem;
+            text-align:center;
+            }
+    </textarea>
+
+        <!-- ✅ Button 6 -->
+        <textarea id="copy6" data-title="array manager">
+//index
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Array Manager</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <main class="wrap">
+
+        <h1>Array Manager</h1>
+        <!-- Array display (hidden initially) -->
+        <section id="arraySection" class="card" style="display:none;">
+            <h2>Array Display</h2>
+            <div id="arrayDisplay" class="display">[]</div>
+        </section>
+        <section class="card">
+            <h2>1. Set Array Size</h2>
+            <div class="row">
+                <input id="sizeInput" placeholder="Enter array
+size" />
+                <button id="setSizeBtn">Set</button>
+                <button id="displaySizeBtn">Display Size</button>
+            </div>
+            <div id="sizeMsg" class="msg"></div>
+        </section>
+        <section class="card">
+            <h2>2. Add Elements</h2>
+            <div class="row">
+                <input id="addInput" type="text" placeholder="Enter element to add" />
+                <button id="addBtn">Add</button>
+            </div>
+            <div id="addMsg" class="msg"></div>
+        </section>
+        <section class="card">
+            <h2>3. Check Element</h2>
+            <div class="row">
+                <input id="checkInput" type="text" placeholder="Value to check" />
+                <button id="checkBtn">Check</button>
+            </div>
+            <div id="checkMsg" class="msg"></div>
+        </section>
+        <section class="card">
+            <h2>4. Remove Element</h2>
+            <div class="row">
+                <input id="removeInput" type="text" placeholder="Value to remove" />
+                <button id="removeBtn">Remove</button>
+                <button id="emptyBtn">Empty Array</button>
+            </div>
+            <div id="removeMsg" class="msg"></div>
+        </section>
+    </main>
+    <script src="index.js"></script>
+</body>
+
+</html>
+
+
+//script.js
+
+document.addEventListener('DOMContentLoaded', () => {
+// DOM refs
+const sizeInput = document.getElementById('sizeInput');
+const setSizeBtn = document.getElementById('setSizeBtn');
+const displaySizeBtn = document.getElementById('displaySizeBtn');
+const sizeMsg = document.getElementById('sizeMsg');
+const addInput = document.getElementById('addInput');
+const addBtn = document.getElementById('addBtn');
+const addMsg = document.getElementById('addMsg');
+const checkInput = document.getElementById('checkInput');
+const checkBtn = document.getElementById('checkBtn');
+const checkMsg = document.getElementById('checkMsg');
+const removeInput = document.getElementById('removeInput');
+const removeBtn = document.getElementById('removeBtn');
+const emptyBtn = document.getElementById('emptyBtn');
+const removeMsg = document.getElementById('removeMsg');
+const arrayDisplay = document.getElementById('arrayDisplay');
+// Internal state
+let capacity = 0; // user-set size
+let arr = []; // underlying array storage (only indices < length used) let length=0; // number of elements currently
+    stored // Utility: render array to screen showing used elements and empty slots function renderArray() { if
+    (capacity===0) { arrayDisplay.textContent='[] (capacity not set)' ; return; } const used=arr.slice(0,
+    length).map(v=> JSON.stringify(v));
+    const emptySlots = Array.from({ length: capacity - length }, () => '_');
+    const combined = used.concat(emptySlots);
+    arrayDisplay.textContent = `[ ${combined.join(' , ')} ] (len=${length} /
+    cap=${capacity})`;
+    }
+    // Utility: show messages
+    function show(el, text, ok = true) {
+    el.textContent = text;
+    el.style.color = ok ? 'var(--muted)' : 'var(--danger)';
+    }
+    // Set size handler
+    // Set size handler
+    setSizeBtn.addEventListener('click', () => {
+    const raw = sizeInput.value.trim();
+    if (!raw) {
+    show(sizeMsg, 'Please enter a valid positive integer capacity.', false);
+    return;
+    }
+    const n = Number(raw);
+    if (!Number.isInteger(n) || n <= 0) { show(sizeMsg, 'Capacity must be a positive integer.' , false); return; }
+        capacity=n; arr=new Array(capacity).fill(null); length=0; show(sizeMsg, `Capacity set to ${capacity}. Array
+        cleared.`); // make array display visible document.getElementById('arraySection').style.display='block' ; //
+        clear other messages show(addMsg, '' ); show(checkMsg, '' ); show(removeMsg, '' ); renderArray(); }); // Display
+        size handler displaySizeBtn.addEventListener('click', ()=> {
+        if (capacity === 0) {
+        show(sizeMsg, 'Capacity not set yet. Use Set button.', false);
+        return;
+        }
+        show(sizeMsg, `Capacity = ${capacity} ; Current length = ${length}`, true);
+        });
+        // Add element handler
+        addBtn.addEventListener('click', () => {
+        addMsg.textContent = '';
+        if (capacity === 0) {
+        show(addMsg, 'Set the array capacity first.', false);
+        return;
+        }
+        if (length >= capacity) {
+        show(addMsg, 'Array size overflow', false);
+        renderArray();
+        return;
+        }
+        const valueRaw = addInput.value;
+        if (valueRaw === '') {
+        show(addMsg, 'Please enter an element to add.', false);
+        return;
+        }
+        // We store as string or number if it's a valid number
+        const parsedNum = Number(valueRaw);
+        const value = (valueRaw.trim() !== '' && !Number.isNaN(parsedNum) &&
+        String(parsedNum) === valueRaw.trim()) ? parsedNum : valueRaw;
+        arr[length] = value;
+        const addedIndex = length;
+        length += 1;
+        show(addMsg, `Added ${JSON.stringify(value)} at index ${addedIndex}`,
+        true);
+        renderArray();
+        addInput.value = '';
+        });
+        // Check element handler (first occurrence)
+        checkBtn.addEventListener('click', () => {
+        checkMsg.textContent = '';
+        if (capacity === 0) {
+        show(checkMsg, 'Set the array capacity first.', false);
+        return;
+        }
+        const raw = checkInput.value;
+        if (raw === '') {
+        show(checkMsg, 'Please enter value to check.', false);
+        return;
+        }
+        const parsedNum = Number(raw);
+        const value = (!Number.isNaN(parsedNum) && String(parsedNum) ===
+        raw.trim()) ? parsedNum : raw;
+        // find first index
+        const idx = arr.findIndex((v, i) => i < length && v===value); if (idx===-1) { show(checkMsg,
+            `${JSON.stringify(value)} not found`, false); } else { show(checkMsg, `${JSON.stringify(value)} is present
+            at index ${idx}`, true); } }); // Remove element handler (first occurrence)
+            removeBtn.addEventListener('click', ()=> {
+            removeMsg.textContent = '';
+            if (capacity === 0) {
+            show(removeMsg, 'Set the array capacity first.', false);
+            return;
+            }
+            const raw = removeInput.value;
+            if (raw === '') {
+            show(removeMsg, 'Please enter value to remove.', false);
+            return;
+            }
+            const parsedNum = Number(raw);
+            const value = (!Number.isNaN(parsedNum) && String(parsedNum) ===
+            raw.trim()) ? parsedNum : raw;
+            // find first occurrence in used part
+            const idx = arr.findIndex((v, i) => i < length && v===value); if (idx===-1) { show(removeMsg,
+                `${JSON.stringify(value)} is not present in array`, false); return; } // shift left all elements after
+                idx for (let i=idx; i < length - 1; i +=1) { arr[i]=arr[i + 1]; } arr[length - 1]=null; // clear last
+                length -=1; show(removeMsg, `${JSON.stringify(value)} removed from index ${idx}`, true); renderArray();
+                removeInput.value='' ; }); // Empty array emptyBtn.addEventListener('click', ()=> {
+                if (capacity === 0) {
+                show(removeMsg, 'Set the array capacity first.', false);
+                return;
+                }
+                arr = new Array(capacity).fill(null);
+                length = 0;
+                show(removeMsg, 'Array emptied', true);
+                renderArray();
+                });
+                // initial render
+                renderArray();
+                });
+
+
+                //style.css
+
+                :root {
+                --bg: #f4f7fb;
+                --card: #ffffff;
+                --accent: #2563eb;
+                --muted: #555;
+                --danger: #b03030;
+                --good: #087f5b;
+                --shadow: 0 6px 18px rgba(20,20,40,0.06);
+                }
+                * { box-sizing: border-box; font-family: Inter, system-ui, Arial, sans-serif; }
+                html,body { height:100%; margin:0; background:
+                linear-gradient(180deg,#f7f9fc 0%, #f4f7fb 100%); }
+                .wrap { max-width: 820px; margin: 28px auto; padding: 18px; }
+                h1 { text-align:center; color:var(--accent); margin-bottom:18px; }
+                .card {
+                background: var(--card);
+                border-radius: 10px;
+                padding: 14px 16px;
+                margin-bottom: 12px;
+                box-shadow: var(--shadow);
+                border: 1px solid rgba(0,0,0,0.04);
+                }
+                .card h2 { margin: 0 0 8px 0; font-size: 1rem; color:#222; }
+                .row {
+                display:flex;
+                gap:8px;
+                align-items:center;
+                flex-wrap:wrap;
+                }
+                input[type="number"], input[type="text"] {
+                padding:8px 10px;
+                border-radius:6px;
+                border:1px solid rgba(0,0,0,0.08);
+                min-width:200px;
+                }
+                button {
+                padding:8px 12px;
+                border:0;
+                border-radius:6px;
+                cursor:pointer;
+                font-weight:600;
+                background:var(--accent);
+                color:white;
+                }
+                button#displaySizeBtn, button#emptyBtn { background:#6b7280; }
+                button#removeBtn { background:#ef4444; }
+                .msg {
+                margin-top:8px;
+                min-height:20px;
+                color:var(--muted);
+                font-weight:600;
+                }
+                .display {
+                background: linear-gradient(180deg, rgba(37,99,235,0.04),
+                rgba(37,99,235,0.02));
+                padding:12px;
+                border-radius:8px;
+                font-family: monospace;
+                font-size:1rem;
+                color:#111;
+                min-height:40px;
+                display:flex;
+                align-items:center;
+                gap:8px;
+                }
+    </textarea>
+
+        <!-- ✅ Button 7 -->
+        <textarea id="copy7" data-title="color change">
+//index
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Home Page with Color Change Events">
+    <title>Home Page Color Change</title>
+    <link rel="stylesheet" href="style_8.css">
+</head>
+
+<body>
+    <header>
+        <h1>Color changes with mouse and focus events.</h1>
+    </header>
+
+    <section id="mouseover-section" class="box">
+        <h2>Mouse Over Event</h2>
+    </section>
+
+    <section id="focus-section">
+        <!-- <h2>Focus Event</h2> -->
+        <input type="text" id="focus-input" placeholder="Click here to focus">
+    </section>
+    <script src="script_8.js"></script>
+</body>
+
+</html>
+
+//script.js
+
+const mouseoverSection = document.getElementById("mouseover-section");
+mouseoverSection.addEventListener("mouseover", function () {
+document.body.style.backgroundColor = "#f39c12"; // Change body background color
+// document.querySelector(".container").style.backgroundColor = "#f8c471"; // Change container background color
+});
+
+mouseoverSection.addEventListener("mouseout", function () {
+document.body.style.backgroundColor = "#f3f4f6"; // Reset body background color
+// document.querySelector(".container").style.backgroundColor = "#fff"; // Reset container background color
+});
+
+const focusInput = document.getElementById("focus-input");
+focusInput.addEventListener("focus", function () {
+document.body.style.backgroundColor = "#f39c12";
+focusInput.style.backgroundColor = "#4CC9FE"; // Change input box background
+});
+
+focusInput.addEventListener("blur", function () {
+document.body.style.backgroundColor = "#f3f4f6";
+focusInput.style.backgroundColor = "#f3f4f6"; // Reset to the original background
+});
+
+//style.css
+
+body,
+html {
+margin: 0;
+padding: 0;
+font-family: Arial, sans-serif;
+background-color: #f3f4f6;
+height: 100%;
+/* display: flex; */
+flex-direction: column;
+justify-content: center;
+align-items: center;
+text-align: center;
+transition: background-color 0.3s ease;
+}
+
+header {
+margin-bottom: 20px;
+}
+
+header h1 {
+color: #333;
+}
+
+section {
+margin: 20px 0;
+padding: 20px;
+border-radius: 10px;
+transition: background-color 0.3s ease;
+}
+
+#mouseover-section {
+margin: 0 500px 0 500px;
+background-color: #3498db;
+color: white;
+cursor: pointer;
+}
+
+#focus-section {
+color: white;
+}
+
+#focus-input {
+padding: 10px;
+width: 200px;
+border: 1px solid #ddd;
+border-radius: 5px;
+font-size: 16px;
+outline: none;
+margin-top: 10px;
+}
+
+.info h2,
+.info h3 {
+margin: 5px;
+}
+
+    </textarea>
+
+        <!-- ✅ Button 8 -->
+        <textarea id="copy8" data-title="last expt">
+//script.js
+
+// Get the command-line arguments
+const args = process.argv;
+
+// The third argument (index 2) will be the number provided by the user
+const num = parseInt(args[2]);
+
+if (isNaN(num)) {
+console.log("Please provide a valid number as an argument.");
+process.exit(1); // Exit if the argument is not a number
+}
+
+// Check if the number is zero
+if (num === 0) {
+console.log("Invalid input: Zero is not allowed. Please provide a non-zero number.");
+process.exit(1); // Exit if the number is zero
+}
+
+// For loop implementation
+console.log(`\nMultiplication Table of ${num} using For Loop:`);
+for (let i = 1; i <= 10; i++) { console.log(`${num} x ${i}=${num * i}`); } // While loop implementation
+    console.log(`\nMultiplication Table of ${num} using While Loop:`); let j=1; while (j <=10) { console.log(`${num} x
+    ${j}=${num * j}`); j++; } // Do-while loop implementation console.log(`\nMultiplication Table of ${num} using
+    Do-While Loop:`); let k=1; do { console.log(`${num} x ${k}=${num * k}`); k++; } while (k <=10);
+    </textarea>
+
+        <!-- ✅ Button 9 -->
+        <textarea id="copy9" data-title="form">
+//index
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Student Information Form</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="form-container" id="formPage">
+        <h2>Student Information Form</h2>
+        <form id="studentForm" novalidate>
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" placeholder="Enter your name">
+                <div class="error" id="nameError"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="address">Address:</label>
+                <input type="text" id="address" placeholder="Enter your address">
+                <div class="error" id="addressError"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="pincode">Pincode:</label>
+                <input type="text" id="pincode" placeholder="Enter 6-digit pincode">
+                <div class="error" id="pincodeError"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="city">City:</label>
+                <input type="text" id="city" placeholder="Auto-filled city">
+                <div class="error" id="cityError"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="state">State:</label>
+                <input type="text" id="state" placeholder="Auto-filled state">
+                <div class="error" id="stateError"></div>
+            </div>
+
+            <div class="form-group">
+                <label>Gender:</label>
+                <div class="gender-options">
+                    <label><input type="radio" name="gender" value="Male"> Male</label>
+                    <label><input type="radio" name="gender" value="Female"> Female</label>
+                    <label><input type="radio" name="gender" value="Other"> Other</label>
+                </div>
+                <div class="error" id="genderError"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="mobile">Mobile Number:</label>
+                <input type="text" id="mobile" placeholder="Enter 10-digit mobile">
+                <div class="error" id="mobileError"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email ID:</label>
+                <input type="email" id="email" placeholder="Enter your email">
+                <div class="error" id="emailError"></div>
+            </div>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
+
+//style.css
+
+/* styles.css */
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+
+body {
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+min-height: 100vh;
+display: flex;
+justify-content: center;
+align-items: center;
+padding: 20px;
+}
+
+.form-container {
+background: white;
+border-radius: 12px;
+box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+padding: 40px;
+width: 100%;
+max-width: 500px;
+position: relative;
+}
+
+h2 {
+text-align: center;
+color: #333;
+margin-bottom: 30px;
+font-size: 28px;
+font-weight: 600;
+}
+
+.form-group {
+margin-bottom: 20px;
+}
+
+label {
+display: block;
+margin-bottom: 8px;
+color: #555;
+font-weight: 500;
+}
+
+input[type="text"],
+input[type="email"] {
+width: 100%;
+padding: 12px 15px;
+border: 2px solid #e1e5e9;
+border-radius: 8px;
+font-size: 16px;
+transition: all 0.3s ease;
+background-color: #f8f9fa;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus {
+outline: none;
+border-color: #667eea;
+background-color: white;
+box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.gender-options {
+display: flex;
+gap: 20px;
+margin-top: 5px;
+}
+
+.gender-options label {
+display: flex;
+align-items: center;
+gap: 5px;
+cursor: pointer;
+font-weight: normal;
+}
+
+.gender-options input[type="radio"] {
+margin: 0;
+cursor: pointer;
+}
+
+.error {
+color: #dc3545;
+font-size: 14px;
+margin-top: 5px;
+min-height: 20px;
+}
+
+button[type="submit"] {
+width: 100%;
+padding: 14px;
+background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+color: white;
+border: none;
+border-radius: 8px;
+font-size: 16px;
+font-weight: 600;
+cursor: pointer;
+transition: all 0.3s ease;
+margin-top: 10px;
+}
+
+button[type="submit"]:hover {
+transform: translateY(-2px);
+box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+button[type="submit"]:active {
+transform: translateY(0);
+}
+
+/* Success page styles */
+h1 {
+color: #28a745;
+margin-bottom: 20px;
+font-size: 36px;
+}
+
+p {
+color: #333;
+font-size: 18px;
+margin-bottom: 30px;
+}
+
+#logoutBtn {
+position: absolute;
+top: 30px;
+right: 30px;
+padding: 10px 20px;
+border: none;
+border-radius: 8px;
+background: #dc3545;
+color: white;
+cursor: pointer;
+font-size: 14px;
+font-weight: 500;
+transition: all 0.3s ease;
+}
+
+#logoutBtn:hover {
+background: #c82333;
+transform: translateY(-1px);
+box-shadow: 0 3px 10px rgba(220, 53, 69, 0.3);
+}
+
+/* Responsive design */
+@media (max-width: 600px) {
+.form-container {
+padding: 30px 20px;
+margin: 10px;
+}
+
+h2 {
+font-size: 24px;
+}
+
+.gender-options {
+flex-direction: column;
+gap: 10px;
+}
+
+#logoutBtn {
+position: relative;
+top: auto;
+right: auto;
+margin-top: 20px;
+}
+}
+
+/* Loading state for pincode API */
+input:disabled {
+background-color: #e9ecef;
+color: #6c757d;
+cursor: not-allowed;
+}
+
+/* Animation for form elements */
+.form-group {
+animation: fadeInUp 0.5s ease forwards;
+opacity: 0;
+transform: translateY(20px);
+}
+
+@keyframes fadeInUp {
+to {
+opacity: 1;
+transform: translateY(0);
+}
+}
+
+/* Stagger animation for form groups */
+.form-group:nth-child(1) {
+animation-delay: 0.1s;
+}
+
+.form-group:nth-child(2) {
+animation-delay: 0.2s;
+}
+
+.form-group:nth-child(3) {
+animation-delay: 0.3s;
+}
+
+.form-group:nth-child(4) {
+animation-delay: 0.4s;
+}
+
+.form-group:nth-child(5) {
+animation-delay: 0.5s;
+}
+
+.form-group:nth-child(6) {
+animation-delay: 0.6s;
+}
+
+.form-group:nth-child(7) {
+animation-delay: 0.7s;
+}
+
+.form-group:nth-child(8) {
+animation-delay: 0.8s;
+}
+
+//script.js
+
+document.addEventListener("DOMContentLoaded", () => {
+const studentForm = document.getElementById("studentForm");
+const nameInput = document.getElementById("name");
+const addressInput = document.getElementById("address");
+const pincodeInput = document.getElementById("pincode");
+const cityInput = document.getElementById("city");
+const stateInput = document.getElementById("state");
+const genderInputs = document.getElementsByName("gender");
+const mobileInput = document.getElementById("mobile");
+const emailInput = document.getElementById("email");
+
+const namePattern = /^[A-Za-z ]+$/;
+const cityStatePattern = /^[A-Za-z ]+$/;
+const pincodePattern = /^\d{6}$/;
+const mobilePattern = /^[6-9]\d{9}$/;
+const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[A-Za-z]{2,}$/;
+
+function validateName() {
+const name = nameInput.value.trim();
+if (!name || !namePattern.test(name)) {
+document.getElementById("nameError").textContent = "Enter a valid name (letters only).";
+return false;
+}
+document.getElementById("nameError").textContent = "";
+return true;
+}
+
+function validateAddress() {
+const address = addressInput.value.trim();
+if (!address) {
+document.getElementById("addressError").textContent = "Address cannot be empty.";
+return false;
+}
+document.getElementById("addressError").textContent = "";
+return true;
+}
+
+function validatePincode() {
+const pincode = pincodeInput.value.trim();
+if (!pincodePattern.test(pincode)) {
+document.getElementById("pincodeError").textContent = "Enter a valid 6-digit pincode.";
+return false;
+}
+// This is primarily for submit check, the live check handles the API call
+document.getElementById("pincodeError").textContent = "";
+return true;
+}
+
+function validateCity() {
+const city = cityInput.value.trim();
+// Since city/state are auto-filled, we only check if they are non-empty after pincode API call
+if (!city || !cityStatePattern.test(city)) {
+document.getElementById("cityError").textContent = "City must be filled (check pincode).";
+return false;
+}
+document.getElementById("cityError").textContent = "";
+return true;
+}
+
+function validateState() {
+const state = stateInput.value.trim();
+// Since city/state are auto-filled, we only check if they are non-empty after pincode API call
+if (!state || !cityStatePattern.test(state)) {
+document.getElementById("stateError").textContent = "State must be filled (check pincode).";
+return false;
+}
+document.getElementById("stateError").textContent = "";
+return true;
+}
+
+function validateGender() {
+const gender = document.querySelector('input[name="gender"]:checked');
+if (!gender) {
+document.getElementById("genderError").textContent = "Please select a gender.";
+return false;
+}
+document.getElementById("genderError").textContent = "";
+return true;
+}
+
+function validateMobile() {
+const mobile = mobileInput.value.trim();
+if (!mobilePattern.test(mobile)) {
+document.getElementById("mobileError").textContent = "Enter a valid 10-digit mobile (starts with 6-9).";
+return false;
+}
+document.getElementById("mobileError").textContent = "";
+return true;
+}
+
+function validateEmail() {
+const email = emailInput.value.trim();
+if (!emailPattern.test(email)) {
+document.getElementById("emailError").textContent = "Enter a valid email address.";
+return false;
+}
+document.getElementById("emailError").textContent = "";
+return true;
+}
+
+// Pincode API call remains on input/change as it auto-fills City/State
+pincodeInput.addEventListener("input", function () {
+const pincode = this.value.trim();
+if (pincode.length === 6 && /^\d{6}$/.test(pincode)) {
+fetch(`https://api.postalpincode.in/pincode/${pincode}`)
+.then(response => response.json())
+.then(data => {
+if (data[0].Status === "Success" && data[0].PostOffice && data[0].PostOffice.length > 0) {
+const postOffice = data[0].PostOffice[0];
+cityInput.value = postOffice.District;
+stateInput.value = postOffice.State;
+document.getElementById("pincodeError").textContent = "";
+} else {
+document.getElementById("pincodeError").textContent = "Invalid or unknown pincode.";
+cityInput.value = "";
+stateInput.value = "";
+}
+// Clear City/State errors if pincode input changes
+document.getElementById("cityError").textContent = "";
+document.getElementById("stateError").textContent = "";
+})
+.catch(err => {
+console.error("Error fetching pincode:", err);
+document.getElementById("pincodeError").textContent = "Could not fetch details. Try again.";
+cityInput.value = "";
+stateInput.value = "";
+});
+} else {
+cityInput.value = "";
+stateInput.value = "";
+document.getElementById("pincodeError").textContent = "";
+}
+});
+
+studentForm.addEventListener("submit", function (e) {
+e.preventDefault();
+
+// Validation check on submit only
+const allValid = validateName() & validateAddress() & validatePincode() & validateCity() & validateState() &
+validateGender() & validateMobile() & validateEmail();
+
+if (allValid) {
+const name = nameInput.value.trim();
+// Updated success page HTML to allow for top-right positioning
+document.body.innerHTML = `
+<div class="form-container" style="text-align:center;">
+    <button id="logoutBtn"
+        style="position: absolute; top: 30px; right: 30px; margin-top:0; padding:10px 20px; border:none; border-radius:8px; background:#dc3545; color:white; cursor:pointer; float:none;">
+        🔙 Logout
+    </button>
+    <div style="margin-top:50px;">
+        <h1>🎉 Congratulations!</h1>
+        <p>Welcome, <b>${name}</b>!</p>
+    </div>
+</div>
+`;
+
+// Set body style for relative positioning context
+document.body.style.position = 'relative';
+
+document.getElementById("logoutBtn").addEventListener("click", function () {
+location.reload();
+});
+}
+});
+});
+    </textarea>
+
+        <!-- ✅ Button 10 -->
+        <textarea id="copy10" data-title="array status">
+HTML Code:
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sized Dynamic Array</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Array </h1>
+        <h1>Harsh</h1>
+        <h1>42174 P5</h1>
+        <div class="controls">
+            <div class="operation-group">
+                <label for="initialSize">Set Array Capacity:</label>
+                <input type="number" id="initialSize" value="3" min="0">
+                <button id="createArrayBtn">Set Size</button>
+            </div>
+            <div class="operation-group">
+                <label for="appendInput">Append Value:</label>
+                <input type="text" id="appendInput" placeholder="e.g., hello, 123, [1,2], {obj:1}">
+                <button id="appendBtn">Append</button>
+            </div>
+            <div class="operation-group">
+                <label for="checkIndex">Check Index for Array:</label>
+                <input type="number" id="checkIndex" placeholder="e.g., 0, 1">
+                <button id="checkBtn">Check</button>
+            </div>
+        </div>
+        <div id="output">
+            <h2>Array Status:</h2>
+            <div id="arrayDisplay"></div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
+
+
+JavaScript Code :-
+
+
+let myArray = [];
+let maxSize = 0;
+const outputDiv = document.getElementById('arrayDisplay');
+function updateDisplay(message = "") {
+outputDiv.innerHTML = `<h3>Current Array (Capacity:
+    ${maxSize})</h3>
+<pre>${JSON.stringify(myArray, null, 2)}</pre>`;
+if (message) {
+outputDiv.innerHTML += `<h4>${message}</h4>`;
+}
+}
+// Sets the maximum size of the array.
+document.getElementById('createArrayBtn').addEventListener('click', () => {
+const size = parseInt(document.getElementById('initialSize').value);
+if (isNaN(size) || size < 0) {alert("Please enter a valid size (0 or greater)."); return; } maxSize=size; myArray=[]; //
+    Reset the array to an empty state updateDisplay("Array capacity set to " + maxSize + " . Start appending values!");
+    }); // Appends value to the array, checking against the set capacity.
+    document.getElementById('appendBtn').addEventListener('click', ()=> {
+    const inputValue = document.getElementById('appendInput').value;
+    if (!inputValue) {
+    alert("Please enter a value to append.");
+    return;
+    }
+    // Check for overflow before appending
+    if (myArray.length >= maxSize) {
+    updateDisplay("OVERFLOW! The array has reached its maximum capacity of " + maxSize +
+    ".");
+    return;
+    }
+    let parsedValue;
+    try {
+    parsedValue = JSON.parse(inputValue);
+    } catch (e) {
+    parsedValue = inputValue;
+    }
+    myArray.push(parsedValue);
+    updateDisplay("Value appended successfully.");});
+    // Checks if the element at a specific index is an array.
+    document.getElementById('checkBtn').addEventListener('click', () => {
+    const indexInput = document.getElementById('checkIndex').value;
+    const index = parseInt(indexInput);
+    // --- MODIFICATION HERE ---
+    if (isNaN(index) || index < 0 || index>= myArray.length) {
+        // Changed alert to updateDisplay
+        updateDisplay(` **Invalid Index!** Please enter a valid index within the array's bounds (0 to
+        ${myArray.length - 1}).`);
+        return;
+        }
+        // -------------------------
+        const itemToCheck = myArray[index];
+        const isAnArray = Array.isArray(itemToCheck);
+        const resultMessage = `The item at index ${index} is: ${JSON.stringify(itemToCheck)}.
+        Is this item an array? **${isAnArray}**`;
+        updateDisplay(resultMessage);
+        });
+        // Initial display
+        updateDisplay("Set the array's capacity to begin.");
+
+        //style.css
+
+        * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        }
+
+        body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        padding: 20px;
+        color: #333;
+        }
+
+        .container {
+        max-width: 900px;
+        margin: 0 auto;
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        padding: 30px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        h1 {
+        text-align: center;
+        margin-bottom: 10px;
+        color: #4a5568;
+        font-size: 2.2em;
+        font-weight: 600;
+        }
+
+        h1:nth-child(2) {
+        color: #2d3748;
+        font-size: 1.8em;
+        }
+
+        h1:nth-child(3) {
+        color: #718096;
+        font-size: 1.2em;
+        margin-bottom: 30px;
+        }
+
+        .controls {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        margin-bottom: 30px;
+        padding: 20px;
+        background: #f7fafc;
+        border-radius: 8px;
+        border: 1px solid #e2e8f0;
+        }
+
+        .operation-group {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: wrap;
+        }
+
+        .operation-group label {
+        font-weight: 600;
+        color: #4a5568;
+        min-width: 180px;
+        }
+
+        .operation-group input {
+        padding: 10px 12px;
+        border: 2px solid #cbd5e0;
+        border-radius: 6px;
+        font-size: 14px;
+        transition: all 0.3s ease;
+        flex: 1;
+        min-width: 150px;
+        }
+
+        .operation-group input:focus {
+        outline: none;
+        border-color: #667eea;
+        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .operation-group button {
+        padding: 10px 20px;
+        background: #667eea;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        white-space: nowrap;
+        }
+
+        .operation-group button:hover {
+        background: #5a6fd8;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+
+        .operation-group button:active {
+        transform: translateY(0);
+        }
+
+        #output {
+        background: #f7fafc;
+        border-radius: 8px;
+        padding: 20px;
+        border: 1px solid #e2e8f0;
+        }
+
+        #output h2 {
+        color: #2d3748;
+        margin-bottom: 15px;
+        font-size: 1.4em;
+        }
+
+        #arrayDisplay {
+        background: white;
+        border: 1px solid #e2e8f0;
+        border-radius: 6px;
+        padding: 20px;
+        margin-top: 10px;
+        min-height: 200px;
+        }
+
+        #arrayDisplay h3 {
+        color: #4a5568;
+        margin-bottom: 15px;
+        font-size: 1.1em;
+        }
+
+        #arrayDisplay h4 {
+        color: #e53e3e;
+        background: #fed7d7;
+        padding: 12px;
+        border-radius: 6px;
+        border-left: 4px solid #e53e3e;
+        margin-top: 15px;
+        font-size: 1em;
+        }
+
+        #arrayDisplay pre {
+        background: #edf2f7;
+        padding: 15px;
+        border-radius: 6px;
+        border: 1px solid #cbd5e0;
+        overflow-x: auto;
+        font-family: 'Consolas', 'Monaco', monospace;
+        font-size: 14px;
+        color: #2d3748;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+        .container {
+        padding: 20px;
+        margin: 10px;
+        }
+
+        .operation-group {
+        flex-direction: column;
+        align-items: stretch;
+        }
+
+        .operation-group label {
+        min-width: auto;
+        }
+
+        .operation-group input,
+        .operation-group button {
+        width: 100%;
+        }
+
+        h1 {
+        font-size: 1.8em;
+        }
+
+        h1:nth-child(2) {
+        font-size: 1.5em;
+        }
+
+        h1:nth-child(3) {
+        font-size: 1.1em;
+        }
+        }
+    </textarea>
+
+    </div>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+    <script>
+        (function () {
+            const grid = document.getElementById('btnGrid');
+            const status = document.getElementById('status');
+            const toast = document.getElementById('toast');
+
+            // build buttons from hidden textareas
+            const blocks = Array.from(document.querySelectorAll('#hiddenBin textarea'));
+            blocks.forEach((ta, i) => {
+                const title = ta.getAttribute('data-title') || ('Button ' + (i + 1));
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.textContent = title;
+                btn.addEventListener('click', async () => {
+                    const text = ta.value; // exact content, including all newlines
+                    const ok = await copy(text);
+                    if (ok) showMsg(`Copied: ${title} ✔`);
+                    else showMsg(`Copy failed for: ${title}`, true);
+                });
+                grid.appendChild(btn);
+            });
+
+            function showMsg(msg, error = false) {
+                status.textContent = msg;
+                status.style.color = error ? '#b03' : '#0a7';
+                toast.textContent = msg;
+                toast.classList.add('show');
+                clearTimeout(toast._t);
+                toast._t = setTimeout(() => toast.classList.remove('show'), 1500);
+                clearTimeout(status._t);
+                status._t = setTimeout(() => status.textContent = '', 1800);
+            }
+
+            async function copy(text) {
+                // Clipboard API first
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    try { await navigator.clipboard.writeText(text); return true; }
+                    catch (e) { /* fallback */ }
+                }
+                // Fallback: temporary textarea select + execCommand
+                const ta = document.createElement('textarea');
+                ta.value = text;
+                ta.style.position = 'fixed';
+                ta.style.left = '-10000px';
+                ta.style.top = '-10000px';
+                document.body.appendChild(ta);
+                ta.focus();
+                ta.select();
+                let ok = false;
+                try { ok = document.execCommand('copy'); }
+                catch (e) { ok = false; }
+                document.body.removeChild(ta);
+                return ok;
+            }
+        })();
+    </script>
+</body>
+
+</html>
